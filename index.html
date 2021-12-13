@@ -8,7 +8,100 @@
         <title>Weather</title>
     </head>
     <body>
-
+        <header class="uk-background-primary uk-light uk-padding-small">
+            <h1 class="uk-text-center">Weather Dashboard</h1>
+        </header>
+        <div uk-grid>
+            <aside class="uk-width-auto">
+                <div class="uk-card uk-card-default uk-card-body uk-margin-top">
+                    <h2 clas="uk-card-title">Search for a City:</h2>
+                    <form action="#" class="uk-text-center">
+                        <input class="uk-input uk-form-blank uk-margin-small-bottom" type="text" id="city">
+                        <button class="uk-button uk-button-primary" id="search">Search</button>
+                    </form>
+                </div>
+            </aside>
+            <main class="uk-width-expand uk-padding">
+                <ul uk-switcher class="" uk-tab="connect: #weather-display" id="city-selection">
+                    <li><a href="#">Seattle</a></li>
+                    <li><a href="#">Pyongyang</a></li>
+                </ul>
+                <ul id="weather-display" class="uk-switcher">
+                    <li>
+                        <div class="uk-card uk-card-body uk-card-default">
+                            <h3 class="uk-card-title">Seattle Weather</h3>
+                        </div>
+                        <div class="uk-card uk-card-body">
+                            <h2 class="uk-card-title">Five Day Forecast</h2>
+                            <div uk-grid class="uk-grid-small uk-child-width-expand\@s">
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        <h3 class="uk-card-title"></h3>
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="uk-card uk-card-body uk-card-default">
+                            <h3 class="uk-card-title">Pyongyang Weather</h3>
+                        </div>
+                        <div class="uk-card uk-card-body">
+                            <h2 class="uk-card-title">Five Day Forecast</h2>
+                            <div uk-grid class="uk-grid-small uk-child-width-expand\@s">
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        <h3 class="uk-card-title"></h3>
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="uk-card uk-card-body uk-card-default">
+                                        stuff
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </main>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.4/dist/js/uikit-icons.min.js"></script>
         <script src="./assets/script.js"></script>
