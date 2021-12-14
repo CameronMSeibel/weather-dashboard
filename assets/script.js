@@ -3,7 +3,7 @@ var cityInput = $("#city");
 var form = $("form");
 var citySelector = $("#city-selection");
 var weatherContainer = $("#weather-display");
-var cities = localStorage.getItem("cities");
+var cities = JSON.parse(localStorage.getItem("cities"));
 
 function renderWeatherContent(city, data){
     var fiveDay = renderFiveDayForecast(data);
@@ -54,8 +54,10 @@ function renderCitySelector(city){
     return `<li><a href="#">${city}</a></li>`;
 }
 
-function search(){
-    var city = cityInput.val();
+function search(e, city){
+    if(!city){
+        city = cityInput.val();
+    }
     if(!city){
         return;
     }
@@ -93,6 +95,7 @@ function getWeather(lat, lon, city){
         .then(function(data){
             if(!cities.includes(city)){
                 cities.push(city);
+                localStorage.setItem("cities", JSON.stringify(cities));
             }
             citySelector.append(renderCitySelector(city));
             weatherContainer.append(renderWeatherContent(city, data));
@@ -102,9 +105,11 @@ function getWeather(lat, lon, city){
         })
 }
 
+console.log(cities);
 if(cities !== null){
     for(city of cities){
-        search(city);
+        console.log(city);
+        search({}, city);
     }
 }else{
     cities = [];
