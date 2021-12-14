@@ -32,14 +32,13 @@ function renderWeatherContent(city, data){
 
 function renderFiveDayForecast(data){
     var forecast = "";
-    console.log(data.daily[0].weather);
     for(i = 0; i < 5; i++){
         forecast += `
 <div class="uk-width-auto">
     <div class="uk-card uk-card-body uk-card-default">
         <h3 class="uk-card-title">${moment.unix(data.daily[i].dt).format("M/D/YYYY")}</h3>
         <ul class="uk-list">
-            <li><img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" alt="${data.daily[i].weather.description}"></li>
+            <li><img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" alt="${data.daily[i].weather.description}"></li>
             <li>Temp: ${data.daily[i].temp.day}&deg;F</li>
             <li>Wind: ${data.daily[i].wind_speed} MPH</li>
             <li>Humidity: ${data.daily[i].humidity}%</li>
@@ -51,7 +50,7 @@ function renderFiveDayForecast(data){
 }
 
 function renderCitySelector(city){
-    return `<li><a href="#">${city}</a></li>`;
+    return `<li><a href="#" id="${city}">${city}</a></li>`;
 }
 
 function search(e, city){
@@ -61,8 +60,8 @@ function search(e, city){
     if(!city){
         return;
     }
-    var url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`;
-    fetch(url)
+    var url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${APIKey}`;
+    fetch(url, {mode: "cors"})
         .then(function(response){
             if(response.ok){
                 return response.json();
@@ -84,7 +83,7 @@ function search(e, city){
 function getWeather(lat, lon, city){
     var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=imperial&appid=${APIKey}`;
 
-    fetch(url)
+    fetch(url, {mode: "cors"})
         .then(function(response){
             if(response.ok){
                 return response.json();
@@ -97,18 +96,17 @@ function getWeather(lat, lon, city){
                 cities.push(city);
                 localStorage.setItem("cities", JSON.stringify(cities));
             }
-            citySelector.append(renderCitySelector(city));
-            weatherContainer.append(renderWeatherContent(city, data));
+            if(!$(`#${city}`).text()){
+                citySelector.append(renderCitySelector(city));
+                weatherContainer.append(renderWeatherContent(city, data));
+            }
         })
         .catch(function(error){
             alert(error);
         })
 }
-
-console.log(cities);
 if(cities !== null){
     for(city of cities){
-        console.log(city);
         search({}, city);
     }
 }else{
